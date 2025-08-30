@@ -10,6 +10,10 @@ This project is part of the **FreeCodeCamp Data Visualization Projects** challen
 - Modern, clean gradient bars with smooth hover effects.  
 - Each bar includes `data-date` and `data-gdp` attributes for FreeCodeCamp project tests.
 
+## Demo
+
+You can view a live demo [here](https://dallatikes.github.io/freeCodeCamp-d3-barchart/)
+
 ## Technologies
 
 - JavaScript (ES6)  
