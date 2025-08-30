@@ -18,3 +18,12 @@ body {
 .bar:hover {
     fill: green;
 }
+
+#tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    pointer-events: none;
+    background-color: lightgrey;
+}

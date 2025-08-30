@@ -48,23 +48,42 @@ async function main() {
         .attr('height', h)
         .style('background', 'blue');
 
+    // create tooltip
+    const tooltip = d3.select('body')
+        .append('div')
+        .attr('id', 'tooltip')
+
     // create bars
     svg
         .selectAll('rect')
         .data(dataset)
         .enter()
         .append('rect')
-        .attr('x', (d, i) => i * barWidth + x_padding)
+        .attr('x', (d, i) => x_scale(new Date(d[0])))
         .attr('y', d => y_scale(d[1]))
         .attr('width', barWidth)
         .attr('height', d => h - y_padding - y_scale(d[1]))
         .attr('class', 'bar')
         .attr('data-date', d => d[0])
         .attr('data-gdp', d => d[1])
-        .append('title')
-        .attr('id', 'tooltip')
-        .attr('data-date', d => d[0])
-        .text(d => `Date : ${d[0]}\nGDP : ${d[1]}`)
+
+    // adding interactivity with tooltip
+    svg
+        .selectAll('rect')
+        .on('mouseover', (event, d) => {
+            tooltip.transition()
+                .duration(200)
+                .style('opacity', 0.9);
+            tooltip.html(`Date: ${d[0]}<br>GDP: $${d[1]} Billion`)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 28) + 'px')
+                .attr('data-date', d[0]);
+        })
+        .on('mouseout', () => {
+            tooltip.transition()
+                .duration(500)
+                .style('opacity', 0);
+        });
 
     // add axes
     const x_axis = d3.axisBottom(x_scale);
