@@ -46,7 +46,23 @@ async function main() {
         .append('svg')
         .attr('width', w)
         .attr('height', h)
-        .style('background', 'blue');
+
+    // create gradient for style
+    const defs = svg.append("defs");
+    const gradient = defs.append("linearGradient")
+        .attr("id", "barGradient")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "0%")
+        .attr("y2", "100%");
+
+    gradient.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#7f5af0");
+    gradient.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#00c4cc");
+
 
     // create tooltip
     const tooltip = d3.select('body')
@@ -68,21 +84,22 @@ async function main() {
         .attr('data-gdp', d => d[1])
 
     // adding interactivity with tooltip
-    svg
-        .selectAll('rect')
+    svg.selectAll('rect')
         .on('mouseover', (event, d) => {
-            tooltip.transition()
-                .duration(200)
-                .style('opacity', 0.9);
-            tooltip.html(`Date: ${d[0]}<br>GDP: $${d[1]} Billion`)
+            tooltip
+                .html(`Date: ${d[0]}<br>GDP: $${d[1]} Billion`)
+                .attr('data-date', d[0])
+                .classed('show', true)
                 .style('left', (event.pageX + 10) + 'px')
-                .style('top', (event.pageY - 28) + 'px')
-                .attr('data-date', d[0]);
+                .style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mousemove', (event) => {
+            tooltip
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
         })
         .on('mouseout', () => {
-            tooltip.transition()
-                .duration(500)
-                .style('opacity', 0);
+            tooltip.classed('show', false);
         });
 
     // add axes

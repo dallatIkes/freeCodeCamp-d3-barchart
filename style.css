@@ -1,29 +1,52 @@
-h1 {
-    text-align: center;
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-body {
-    background-color: beige;
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
 }
 
 #chart {
     border-radius: 20px;
-    background-color: white;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 95%;
+    max-width: 1250px;
 }
 
 .bar {
-    fill: red;
+    fill: url(#barGradient);
+    transition: fill 0.3s, transform 0.2s;
+    cursor: pointer;
 }
 
 .bar:hover {
-    fill: green;
+    fill: #00c4cc;
+    transform: translateY(-3px);
 }
 
 #tooltip {
     position: absolute;
     text-align: center;
-    padding: 8px;
+    padding: 10px 12px;
     border-radius: 8px;
     pointer-events: none;
-    background-color: lightgrey;
+    background-color: rgba(50, 50, 50, 0.85);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#tooltip.show {
+    opacity: 1;
 }
