@@ -1,0 +1,20 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: beige;
+}
+
+#chart {
+    border-radius: 20px;
+    background-color: white;
+}
+
+.bar {
+    fill: red;
+}
+
+.bar:hover {
+    fill: green;
+}
